@@ -1,6 +1,8 @@
-package toy;
+package src.toy;
 
-public class Toy {
+import java.io.Serializable;
+
+public class Toy implements Serializable {
     private final int id;
     private final String name;
     private int quantity;
@@ -35,5 +37,15 @@ public class Toy {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Toy{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", weight='" + weight + '\'' +
+                '}' + "\n";
     }
 }

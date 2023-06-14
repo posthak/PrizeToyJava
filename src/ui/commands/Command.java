@@ -1,6 +1,6 @@
-package ui.commands;
+package src.ui.commands;
 
-import java.io.Console;
+import src.ui.Console;
 
 public abstract class Command implements Option {
     private Console console;

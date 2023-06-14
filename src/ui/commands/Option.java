@@ -1,4 +1,4 @@
-package ui.commands;
+package src.ui.commands;
 
 public interface Option {
     String description();

@@ -2,81 +2,86 @@ package src;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.Serializable;
 import src.inout.InOut;
-import toy.Toy;
+import src.toy.Toy;
 
-public class Service {
+public class Service implements Serializable {
     private List<Toy> toys;
+    private List<Toy> prizeToys;
     private InOut inOut;
 
     public Service() {
-        this.toys = new ArrayList<Toy>();
+        this.toys = new ArrayList<>();
+        this.prizeToys = new ArrayList<>();
         this.inOut = new InOut();
     }
 
-    // public void sortByName() {
-    // geoTree.sortByName();
-    // }
-
-    // public void sortByAge() {
-    // geoTree.sortByAge();
-    // }
-
-    // public void fileUpload() {
-    // inOut.fileUpload(geoTree);
-    // }
-
-    // public GeoTree fileDownload() {
-    // return inOut.fileDownload();
-    // }
-
-    public int addToy(int id, String name, int quantity, int weight) {
-        // if (TypeInfo.getPerson(fullName) == null) {
-        // geoTree.addPerson(new Person(fullName, gender, age));
-        // return 1;
-        // } else {
-        // return 0;
-        // }
-        new Toy(id, name, quantity, weight);
+    public int maintainToyWeght(int id, int weight) {
+        for (Toy toy : toys) {
+            if (toy.getId() == id) {
+                toy.setWeight(weight);
+                return 1;
+            }
+        }
         return 0;
     }
 
-    // public Person getPerson(String fullName) {
-    // return geoTree.getPerson(fullName);
-    // }
+    public Toy choosePrizeToys() {
+        int weight = getTotalWeight();
+        Toy winToy = null;
+        if (weight > 0) {
+            double randomWeight = (Math.random() * weight) + 1;
+            int tempWeight = 0;
+            for (Toy toy : toys) {
+                tempWeight += toy.getWeight();
+                if (tempWeight >= randomWeight) {
+                    winToy = new Toy(toy.getId(), toy.getName(), 1, toy.getWeight());
+                    prizeToys.add(winToy);
+                    toy.setQuantity(toy.getQuantity() - 1);
+                    break;
+                }
+            }
+        }
+        return winToy;
+    }
 
-    public List<Toy> getToyList() {
+    public String receivePrizeToys() {
+        if (!prizeToys.isEmpty()) {
+            Toy t = showPrizeToys().get(0);
+            prizeToys.remove(0);
+            inOut.fileUpload(t);
+            return t.getName();
+        }
+        return null;
+    }
+
+    public int getTotalWeight() {
+        int weight = 0;
+        for (Toy toy : toys) {
+            weight += toy.getWeight();
+        }
+        return weight;
+
+    }
+
+    public int addToy(int id, String name, int quantity, int weight) {
+        for (Toy t : toys) {
+            if (t.getId() == id) {
+                t.setQuantity(t.getQuantity() + quantity);
+                t.setWeight(weight);
+                return 2;
+            }
+        }
+        toys.add(new Toy(id, name, quantity, weight));
+        return 1;
+    }
+
+    public List<Toy> showToys() {
         return toys;
     }
 
-    // public List<Node<Person>> getNodeList() {
-    // return geoTree.getNodelist();
-    // }
-
-    // public int addNode(String p1, Relationship relation, String p2) {
-    // if (getPerson(p1) == null) {
-    // return 0;
-    // } else if (getPerson(p2) == null) {
-    // return 0;
-    // } else {
-    // geoTree.addNode(new Node<Person>(getPerson(p1), relation, getPerson(p2)));
-    // geoTree.addNode(new Node<Person>(getPerson(p2), Relationship.children,
-    // getPerson(p1)));
-    // return 1;
-    // }
-    // }
-
-    // public int delPerson(String fullName) {
-    // if (getPerson(fullName) == null) {
-    // return 0;
-    // } else {
-    // geoTree.delPerson(getPerson(fullName));
-    // return 1;
-    // }
-    // }
-
-    // public List<Node<Person>> findByPerson(String p1) {
-    // return geoTree.findByPerson(getPerson(p1));
-    // }
+    public List<Toy> showPrizeToys() {
+        return prizeToys;
+    }
 }

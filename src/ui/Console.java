@@ -1,8 +1,7 @@
-package ui;
+package src.ui;
 
 import java.util.Scanner;
-
-import presenter.Presenter;
+import src.presenter.Presenter;
 
 public class Console implements View {
 
@@ -45,40 +44,52 @@ public class Console implements View {
     }
 
     public void addToy() {
-        // String fulName;
-        // Integer age;
-        // Gender gender;
+        System.out.println("Введите id");
+        int id = scanner.nextInt();
 
-        // System.out.println("Введите имя человека");
-        // fulName = scanner.nextLine();
+        scanner.nextLine();
 
-        // System.out.println("Введите возраст человека");
-        // age = scanner.nextInt();
+        System.out.println("Введите имя игрушки");
+        String name = scanner.nextLine();
 
-        // System.out.println("Введите номер пола 1.Female или 2.Male");
-        // if (scanner.nextInt() == 1) {
-        // gender = Gender.female;
-        // } else {
-        // gender = Gender.male;
-        // }
-        // presenter.addPerson(fulName, gender, age);
-        // presenter.getPersonList();
+        System.out.println("Введите количество игрушшек");
+        int quantity = scanner.nextInt();
+
+        System.out.println("Введите вес игрушки");
+        int weight = scanner.nextInt();
+
+        presenter.addToy(id, name, quantity, weight);
+
+        // presenter.addToy(1, "Конструктор", 2, 20);
+        // presenter.addToy(2, "Кубик", 2, 20);
+        // presenter.addToy(3, "Робот", 6, 60);
+        presenter.showToys();
     }
 
-    public void getPersonList() {
-        presenter.getPersonList();
+    public void maintainToyWeght() {
+
+        System.out.println("Введите id: ");
+        int id = scanner.nextInt();
+
+        System.out.println("Введите вес игрушки: ");
+        int weight = scanner.nextInt();
+        presenter.maintainToyWeght(id, weight);
     }
 
-    public void getNodeList() {
-        presenter.getNodeList();
+    public void choosePrizeToys() {
+        presenter.choosePrizeToys();
     }
 
-    public void download() {
-        presenter.download();
+    public void showToys() {
+        presenter.showToys();
     }
 
-    public void upload() {
-        presenter.upload();
+    public void showPrizeToys() {
+        presenter.showPrizeToys();
+    }
+
+    public void receivePrizeToys() {
+        presenter.receivePrizeToys();
     }
 
     @Override

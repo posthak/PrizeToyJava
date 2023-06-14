@@ -2,19 +2,19 @@ package src.ui.commands;
 
 import src.ui.Console;
 
-public class AddToy extends Command {
+public class СhoosePrizeToys extends Command {
 
-    public AddToy(Console console) {
+    public СhoosePrizeToys(Console console) {
         super(console);
     }
 
     @Override
     public String description() {
-        return "Добавить игрушку";
+        return "Розыгрыш игрушек";
     }
 
     @Override
     public void execute() {
-        getConsole().addToy();
+        getConsole().choosePrizeToys();
     }
 }

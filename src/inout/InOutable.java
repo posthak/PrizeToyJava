@@ -1,11 +1,7 @@
 package src.inout;
 
-import java.util.List;
-
-import toy.Toy;
+import src.toy.Toy;
 
 public interface InOutable {
-    void fileUpload(List<Toy> t);
-
-    List<Toy> fileDownload();
+    void fileUpload(Toy t);
 }

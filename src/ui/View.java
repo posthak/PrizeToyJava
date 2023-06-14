@@ -1,6 +1,6 @@
-package ui;
+package src.ui;
 
-import presenter.Presenter;
+import src.presenter.Presenter;
 
 public interface View {
     void setPresenter(Presenter presenter);
